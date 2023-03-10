@@ -36,6 +36,10 @@ class MyStack extends TerraformStack {
       name: 'example',
       template: {
         containers: [{
+          env: [{
+            name: 'DEBUG',
+            value: 'true',
+          }],
           image: 'us-docker.pkg.dev/cloudrun/container/hello',
         }],
       },
