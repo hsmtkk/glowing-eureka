@@ -1,0 +1,18 @@
+steps:
+- name: gcr.io/kaniko-project/executor:latest
+  args:
+  - --cache=true
+  - --cache-ttl=168h
+  - --context=app
+  - --destination=${_REGION}-docker.pkg.dev/glowing-eureka/registry/app:${COMMIT_SHA}
+  - --dockerfile=app/Dockerfile
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+  entrypoint: gcloud
+  args:
+  - run
+  - deploy
+  - example
+  - --image=${_REGION}-docker.pkg.dev/glowing-eureka/registry/app:${COMMIT_SHA}
+  - --region=${_REGION}
+substitutions:
+  _REGION: us-central1
