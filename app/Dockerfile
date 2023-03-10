@@ -1,10 +1,10 @@
-FROM python:3.11 AS runtime
+FROM python:3.10 AS runtime
 
 WORKDIR /app
 
 # Cloud Profiler needs build environment
-RUN apt-get -y update \
- && apt-get install -y build-essential
+#RUN apt-get -y update \
+# && apt-get install -y build-essential
 
 COPY requirements.txt /app/requirements.txt
 
