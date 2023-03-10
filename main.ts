@@ -31,7 +31,7 @@ class MyStack extends TerraformStack {
       },
     });
 
-    new google.cloudRunV2Service.CloudRunV2Service(this, 'example', {
+    const exampleService = new google.cloudRunV2Service.CloudRunV2Service(this, 'example', {
       location: region,
       name: 'example',
       template: {
@@ -43,6 +43,20 @@ class MyStack extends TerraformStack {
           image: 'us-docker.pkg.dev/cloudrun/container/hello',
         }],
       },
+    });
+
+    const publicData = new google.dataGoogleIamPolicy.DataGoogleIamPolicy(this, 'publicData', {
+      binding: [{
+        role: 'roles/run.invoker',
+        members: ['allUsers'],
+      }],
+    });
+
+    new google.cloudRunServiceIamPolicy.CloudRunServiceIamPolicy(this, 'publicPolicy', {
+      location: region,
+      policyData: publicData.policyData,
+      project,
+      service: exampleService.name,
     });
 
   }
