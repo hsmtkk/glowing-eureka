@@ -5,6 +5,7 @@ steps:
   - --cache-ttl=168h
   - --context=app
   - --destination=${_REGION}-docker.pkg.dev/glowing-eureka/registry/app:${COMMIT_SHA}
+  - --destination=${_REGION}-docker.pkg.dev/glowing-eureka/registry/app:latest
   - --dockerfile=app/Dockerfile
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
   entrypoint: gcloud

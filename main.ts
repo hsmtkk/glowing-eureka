@@ -40,7 +40,7 @@ class MyStack extends TerraformStack {
             name: 'DEBUG',
             value: 'true',
           }],
-          image: 'us-docker.pkg.dev/cloudrun/container/hello',
+          image: 'us-central1-docker.pkg.dev/glowing-eureka/registry/app:latest',
         }],
       },
     });
